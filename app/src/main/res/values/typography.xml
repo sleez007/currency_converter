@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextAppearance.Converter.bold" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="fontFamily">@font/poppins_medium</item>
+        <item name="android:textColor">@color/brand_purple</item>
+    </style>
+
+    <style name="TextAppearance.Converter.normal" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="fontFamily">@font/poppins_light</item>
+        <item name="android:textColor">@color/brand_green</item>
+    </style>
+</resources>

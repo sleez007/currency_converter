@@ -15,6 +15,7 @@ import ng.etokakingsley.cowrywise_converter.network.ApiService
 import ng.etokakingsley.cowrywise_converter.network.interceptor.ConnectivityStatusInterceptor
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -31,7 +32,9 @@ object NetworkModule {
 
     @Provides
     fun provideOkHttp(@OkHttpInterceptor connectivityStatusInterceptor: Interceptor): OkHttpClient {
-        return OkHttpClient.Builder().addInterceptor(connectivityStatusInterceptor).build()
+        return OkHttpClient.Builder()
+            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+            .addInterceptor(connectivityStatusInterceptor).build()
     }
 
     @Provides

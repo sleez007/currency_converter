@@ -16,7 +16,7 @@ class RemoteDSImpl @Inject constructor(private  val apiService: ApiService) : Re
     }
 
     override suspend fun requestSingleRate(accessKey: String, symbol: String):Result<BaseModel> {
-        val deferred = apiService.loadParticularRate(accessKey,symbol)
+        val deferred = apiService.loadParticularRateAsync(accessKey,symbol)
         return handleResponseMapping(deferred)
     }
 

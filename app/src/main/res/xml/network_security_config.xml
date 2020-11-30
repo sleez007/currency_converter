@@ -3,6 +3,7 @@
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">http://data.fixer.io/api/</domain>
     </domain-config>
+    <base-config cleartextTrafficPermitted="true"/>
 </network-security-config>
 
 <!--    192.168.43.205-->

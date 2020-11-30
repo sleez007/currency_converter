@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="android.view.View"/>
+        <variable
+            name="vm"
+            type="ng.etokakingsley.cowrywise_converter.ui.home.HomeViewModel" />
     </data>
 
     <ScrollView

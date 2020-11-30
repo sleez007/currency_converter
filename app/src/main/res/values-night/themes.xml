@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Final, top-level theme-->
+    <style name="Theme.Converter.DayNight" parent="Theme.Converter.Dark"/>
+
+    <style name="Theme.Converter.Dark" parent="Theme.Converter">
+
+        <item name="android:statusBarColor">#000000</item>
+        <item name="android:colorBackground">@color/dark_background</item>
+    </style>
+</resources>

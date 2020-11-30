@@ -11,10 +11,15 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
 
+    <string name="access_token">b12257b79e1ea3ac70e2749f6b73013c</string>
     <string name="market_rate_formatter"><u>Mid-market exchange rate at 13:38 UTC</u></string>
     <string name="gets_rate"><u>Get rate alerts straight to your email inbox</u></string>
     <string name="past_30_days">Past 30 days</string>
     <string name="past_90_days">Past 90 days</string>
     <string name="currency">Currency</string>
     <string name="calculator">Calculator</string>
+    <string name="connection_error">Connection Error! Try again</string>
+    <string name="retry">Retry</string>
+    <string name="loading">Loading...</string>
+    <string name="convert">Convert</string>
 </resources>

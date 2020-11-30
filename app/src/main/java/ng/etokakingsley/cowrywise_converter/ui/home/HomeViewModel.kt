@@ -3,23 +3,55 @@ package ng.etokakingsley.cowrywise_converter.ui.home
 import android.content.Context
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.launch
+import ng.etokakingsley.cowrywise_converter.db.entities.Rate
 import ng.etokakingsley.cowrywise_converter.helper.Event
+import ng.etokakingsley.cowrywise_converter.internal.NetworkCb
 import ng.etokakingsley.cowrywise_converter.repository.AppRepository
+import timber.log.Timber
 
-class HomeViewModel @ViewModelInject constructor(@Assisted private val savedStateHandle: SavedStateHandle, val appRepository: AppRepository, @ApplicationContext context: Context) : ViewModel() {
+class HomeViewModel @ViewModelInject constructor(@Assisted private val savedStateHandle: SavedStateHandle, val appRepository: AppRepository, @ApplicationContext context: Context) : ViewModel(), NetworkCb<String> {
     val flashErrorMessage =   MutableLiveData<Event<String>>()
     val flashSuccessMessage = MutableLiveData<Event<String>>()
     val initialTo = MutableLiveData<String>("PLN")
     val isLoading = MutableLiveData<Boolean>(false)
+
+    val rates: LiveData<List<Rate>> = appRepository.fetchAllRate().asLiveData()
+
+    val currentRate : LiveData<Rate> = Transformations.switchMap(initialTo){
+        it?.let {
+            appRepository.fetchSingleRate("2020-11-30", it).asLiveData()
+        }
+    }
     init {
         requestData()
     }
-    fun requestData(){
+    private fun requestData(){
+        viewModelScope.launch {
+            isLoading.value = true
+            appRepository.requestAllRate(this@HomeViewModel)
+        }
+    }
 
+    fun requestSingleRate(symbol : String){
+        initialTo.value = symbol
+        viewModelScope.launch {
+            isLoading.value = true
+            appRepository.requestSingleRate(this@HomeViewModel, symbol)
+        }
+    }
+
+    override fun success(response: String) {
+        Timber.i(response)
+        isLoading.value = false
+        flashSuccessMessage.postValue(Event(response))
+    }
+
+    override fun error(message: String) {
+        isLoading.value = false
+        Timber.i(message)
+        flashErrorMessage.postValue(Event(message))
     }
 }

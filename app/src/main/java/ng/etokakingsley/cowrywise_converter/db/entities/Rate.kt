@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "rate_table", indices =[Index(value = ["base","toCurrency"], unique = true)])
+@Entity(tableName = "rate_table", indices =[Index(value = ["base","toCurrency", "date"], unique = true)])
 data class Rate(
     @PrimaryKey(autoGenerate = true)
     val id : Long = 0,

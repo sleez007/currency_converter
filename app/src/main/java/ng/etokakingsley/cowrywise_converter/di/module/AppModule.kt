@@ -10,7 +10,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
-import ng.etokakingsley.cowrywise_converter.db.CoinDB
+import ng.etokakingsley.cowrywise_converter.db.RateDB
 import ng.etokakingsley.cowrywise_converter.db.dao.RateDao
 import ng.etokakingsley.cowrywise_converter.repository.AppRepository
 import ng.etokakingsley.cowrywise_converter.repository.AppRepositoryImp
@@ -29,12 +29,12 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideDataBase(@ApplicationContext context: Context):CoinDB{
-        return Room.databaseBuilder(context.applicationContext,CoinDB::class.java,"currency_converter.db").build()
+    fun provideDataBase(@ApplicationContext context: Context):RateDB{
+        return Room.databaseBuilder(context.applicationContext,RateDB::class.java,"currency_converter.db").build()
     }
 
     @Provides
-    fun provideRateDao(db: CoinDB): RateDao = db.getRateDao()
+    fun provideRateDao(db: RateDB): RateDao = db.getRateDao()
 
     @Singleton
     @Provides

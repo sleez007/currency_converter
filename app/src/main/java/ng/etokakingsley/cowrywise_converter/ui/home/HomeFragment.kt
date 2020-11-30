@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import dagger.hilt.android.AndroidEntryPoint
 import ng.etokakingsley.cowrywise_converter.R
 import ng.etokakingsley.cowrywise_converter.databinding.FragmentHomeBinding
+import ng.etokakingsley.cowrywise_converter.helper.SnackBarUtil
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -34,10 +35,26 @@ class HomeFragment : Fragment() {
             vm = homeViewModel
             lifecycleOwner = viewLifecycleOwner
         }
+        subscribeUI()
     }
 
     private fun subscribeUI(){
-
+        homeViewModel.flashSuccessMessage.observe(viewLifecycleOwner){
+            it?.getContentIfNotHandled()?.let {msg->
+                binding?.let {
+                    val snack = SnackBarUtil.successSnack(it.parentLayout,msg, requireContext() )
+                    snack.show()
+                }
+            }
+        }
+        homeViewModel.flashErrorMessage.observe(viewLifecycleOwner){
+            it?.getContentIfNotHandled()?.let {msg->
+                binding?.let {
+                    val snack = SnackBarUtil.errorSnack(view = it.parentLayout,msg = msg, requireContext() )
+                    snack.show()
+                }
+            }
+        }
     }
 
     /**

@@ -6,6 +6,6 @@ import ng.etokakingsley.cowrywise_converter.db.dao.RateDao
 import ng.etokakingsley.cowrywise_converter.db.entities.Rate
 
 @Database(entities = [Rate::class], version = 1, exportSchema = false)
-abstract class CoinDB: RoomDatabase() {
+abstract class RateDB: RoomDatabase() {
     abstract fun getRateDao(): RateDao
 }

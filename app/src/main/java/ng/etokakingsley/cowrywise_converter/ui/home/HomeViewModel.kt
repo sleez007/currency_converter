@@ -17,6 +17,7 @@ class HomeViewModel @ViewModelInject constructor(@Assisted private val savedStat
     val flashSuccessMessage = MutableLiveData<Event<String>>()
     val initialTo = MutableLiveData<String>("PLN")
     val isLoading = MutableLiveData<Boolean>(false)
+    val from = MutableLiveData<String>("1")
 
     val rates: LiveData<List<Rate>> = appRepository.fetchAllRate().asLiveData()
 
@@ -54,4 +55,10 @@ class HomeViewModel @ViewModelInject constructor(@Assisted private val savedStat
         Timber.i(message)
         flashErrorMessage.postValue(Event(message))
     }
+
+    fun formattedVal(rate: Rate?, from : String? ):String{
+        return if(rate!=null && from!=null && from.trim()!="" ) (rate.rate* from.toDouble()).toString() else "0.0"
+    }
+
+
 }

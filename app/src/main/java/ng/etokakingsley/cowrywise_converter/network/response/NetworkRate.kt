@@ -2,7 +2,6 @@ package ng.etokakingsley.cowrywise_converter.network.response
 
 
 import com.google.gson.annotations.SerializedName
-import ng.etokakingsley.cowrywise_converter.model.LocalRate
 
 class NetworkRate {
     @SerializedName("AED")

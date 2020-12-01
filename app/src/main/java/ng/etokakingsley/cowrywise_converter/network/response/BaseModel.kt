@@ -5,5 +5,5 @@ data class BaseModel(
     val timestamp : Long,
     val base : String,
     val date : String,
-    val rate : NetworkRate
+    val rates : NetworkRate
 )

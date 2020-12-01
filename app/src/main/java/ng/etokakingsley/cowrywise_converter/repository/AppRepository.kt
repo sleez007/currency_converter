@@ -9,5 +9,4 @@ interface AppRepository {
     suspend fun requestSingleRate(cb:NetworkCb<String>, symbol: String)
     fun fetchSingleRate(date: String, symbol : String): Flow<Rate>
     fun fetchAllRate(): Flow<List<Rate>>
-    suspend fun bulkInsertRate(data : List<Rate>)
 }

@@ -16,7 +16,8 @@ class AppRepositoryImp @Inject constructor(private val localDS: LocalDS, private
         val accessKey = context.getString(R.string.access_token)
         when(val data = remoteDS.requestAllRate(accessKey)){
             is Result.Success ->{
-
+                localDS.bulkInsertRate(data.data)
+                cb.success("Fetched")
             }
             is Result.Error ->{
                 cb.error(data.exception.message ?: context.getString(R.string.connection_error))
@@ -26,9 +27,10 @@ class AppRepositoryImp @Inject constructor(private val localDS: LocalDS, private
 
     override suspend fun requestSingleRate(cb: NetworkCb<String>, symbol: String) {
         val accessKey = context.getString(R.string.access_token)
-        when(val data = remoteDS.requestSingleRate(accessKey, symbol)){
+        //val data = remoteDS.requestSingleRate(accessKey, symbol)
+        when(val data = remoteDS.requestAllRate(accessKey)){
             is Result.Success ->{
-
+                cb.success("Fetched")
             }
             is Result.Error ->{
                 cb.error(data.exception.message ?: context.getString(R.string.connection_error))
@@ -40,5 +42,4 @@ class AppRepositoryImp @Inject constructor(private val localDS: LocalDS, private
 
     override fun fetchAllRate(): Flow<List<Rate>> =  localDS.fetchAllRate()
 
-    override suspend fun bulkInsertRate(data: List<Rate>) = localDS.bulkInsertRate(data)
 }

@@ -22,7 +22,7 @@ class HomeViewModel @ViewModelInject constructor(@Assisted private val savedStat
 
     val currentRate : LiveData<Rate> = Transformations.switchMap(initialTo){
         it?.let {
-            appRepository.fetchSingleRate("2020-11-30", it).asLiveData()
+            appRepository.fetchSingleRate("2020-12-01", it).asLiveData()
         }
     }
     init {

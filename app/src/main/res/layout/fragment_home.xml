@@ -237,12 +237,14 @@
                     app:layout_constraintTop_toBottomOf="@+id/textButton" />
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/materialCardView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     android:elevation="0dp"
                     app:cardBackgroundColor="#0062D5"
                     app:cardCornerRadius="24dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView6">
@@ -259,10 +261,25 @@
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="16dp"
                             android:text="@string/past_30_days"
+                            app:toggleSelected="@{vm.currentTab==1}"
+                            android:onClick="@{()->vm.switchTabs(1)}"
                             android:textAppearance="@style/TextAppearance.Converter.normal"
-                            android:textColor="@color/white"
+                            tools:textColor="@color/white"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/dot1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:src="@drawable/ic_baseline_fiber_manual_record_24"
+                            app:tint="@color/brand_green"
+                            app:toggleSelected="@{vm.currentTab==1}"
+                            app:layout_constraintEnd_toEndOf="@+id/textView7"
+                            app:layout_constraintHorizontal_bias="0.571"
+                            app:layout_constraintStart_toStartOf="@+id/textView7"
+                            app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
                         <TextView
                             android:id="@+id/textView8"
@@ -271,22 +288,39 @@
                             android:layout_marginTop="16dp"
                             android:layout_marginEnd="16dp"
                             android:text="@string/past_90_days"
+                            android:onClick="@{()->vm.switchTabs(2)}"
+                            app:toggleSelected="@{vm.currentTab==2}"
                             android:textAppearance="@style/TextAppearance.Converter.normal"
-                            android:textColor="@color/white"
+                            tools:textColor="@color/white"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/dot2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:src="@drawable/ic_baseline_fiber_manual_record_24"
+                            app:tint="@color/brand_green"
+                            tools:visibility="gone"
+                            app:toggleSelected="@{vm.currentTab==2}"
+                            app:layout_constraintEnd_toEndOf="@+id/textView8"
+                            app:layout_constraintHorizontal_bias="0.571"
+                            app:layout_constraintStart_toStartOf="@+id/textView8"
+                            app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
 
                         <com.github.mikephil.charting.charts.LineChart
                             android:id="@+id/chart1"
                             android:layout_width="0dp"
-                            android:layout_height="372dp"
+                            android:layout_height="350dp"
+                            tools:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="16dp"
                             android:layout_marginEnd="16dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+                            app:layout_constraintTop_toBottomOf="@+id/dot1" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -304,6 +338,14 @@
                             app:layout_constraintTop_toBottomOf="@+id/chart1" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="33dp"
+                    android:background="#0062D5"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

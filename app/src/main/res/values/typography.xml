@@ -9,4 +9,8 @@
         <item name="fontFamily">@font/poppins_light</item>
         <item name="android:textColor">@color/brand_green</item>
     </style>
+
+    <style name="TextAppearance.Converter.popup" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="fontFamily">@font/poppins_light</item>
+    </style>
 </resources>

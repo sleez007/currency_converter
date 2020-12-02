@@ -5,6 +5,7 @@
     <color name="dark_background">#121212</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="grey">#6AFFFFFF</color>
 
     <!--SNACKBAR-->
     <color name="error_snack">#B00020</color>

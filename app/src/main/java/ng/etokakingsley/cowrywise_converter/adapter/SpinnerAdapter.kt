@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import ng.etokakingsley.cowrywise_converter.R
 import ng.etokakingsley.cowrywise_converter.model.SpinnerObj
 
 
-class SpinnerAdapter(val context: Context, val dataSource :List<SpinnerObj>) : BaseAdapter(){
+class SpinnerAdapter(val context: Context, private val dataSource :List<SpinnerObj>) : BaseAdapter(){
     private val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     override fun getCount(): Int = dataSource.size
 
@@ -30,7 +31,7 @@ class SpinnerAdapter(val context: Context, val dataSource :List<SpinnerObj>) : B
             view = convertView
             vh = view.tag as ItemHolder
         }
-        vh.label.text = dataSource.get(position).text
+        vh.label.text = dataSource[position].text
         vh.img.setImageResource(dataSource[position].drawable)
         return view
     }

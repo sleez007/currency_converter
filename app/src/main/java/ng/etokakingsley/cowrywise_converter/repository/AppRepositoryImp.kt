@@ -40,6 +40,6 @@ class AppRepositoryImp @Inject constructor(private val localDS: LocalDS, private
 
     override fun fetchSingleRate(date: String, symbol: String): Flow<Rate> = localDS.fetchSingleRate(date, symbol)
 
-    override fun fetchAllRate(): Flow<List<Rate>> =  localDS.fetchAllRate()
+    override fun fetchAllRate(symbol: String): Flow<List<Rate>> =  localDS.fetchAllRate(symbol)
 
 }

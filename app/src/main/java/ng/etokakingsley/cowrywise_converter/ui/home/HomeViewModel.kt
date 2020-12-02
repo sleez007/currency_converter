@@ -19,11 +19,17 @@ class HomeViewModel @ViewModelInject constructor(@Assisted private val savedStat
     val isLoading = MutableLiveData<Boolean>(false)
     val from = MutableLiveData<String>("1")
 
-    val rates: LiveData<List<Rate>> = appRepository.fetchAllRate().asLiveData()
+    val currentTab = MutableLiveData<Int>(1)
+
+    val rates: LiveData<List<Rate>> = Transformations.switchMap(initialTo){
+        it?.let {
+            appRepository.fetchAllRate(it).asLiveData()
+        }
+    }
 
     val currentRate : LiveData<Rate> = Transformations.switchMap(initialTo){
         it?.let {
-            appRepository.fetchSingleRate("2020-12-01", it).asLiveData()
+            appRepository.fetchSingleRate("2020-12-02", it).asLiveData()
         }
     }
     init {
@@ -58,6 +64,14 @@ class HomeViewModel @ViewModelInject constructor(@Assisted private val savedStat
 
     fun formattedVal(rate: Rate?, from : String? ):String{
         return if(rate!=null && from!=null && from.trim()!="" ) (rate.rate* from.toDouble()).toString() else "0.0"
+    }
+
+    fun switchTabs(position : Int ){
+        currentTab.value = position
+    }
+
+    fun switchCurrency(selectedCurrency : String){
+        initialTo.value = selectedCurrency
     }
 
 

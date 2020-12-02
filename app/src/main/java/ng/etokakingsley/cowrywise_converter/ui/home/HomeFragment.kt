@@ -161,15 +161,12 @@ class HomeFragment : Fragment() {
 
             val leftAxis = it.chart1.axisLeft
             leftAxis.removeAllLimitLines()
-
            // leftAxis.axisMaximum = 1 + 100f
             val minVal  = rateList.minByOrNull { it.rate }
             leftAxis.axisMinimum = minVal?.rate?.toFloat() ?: 0f
             leftAxis.enableGridDashedLine(10f, 10f, 0f)
             leftAxis.setDrawZeroLine(false)
             leftAxis.setDrawLimitLinesBehindData(false)
-            //XAxis xAxis = mBarChart.getXAxis();
-            //XAxis xAxis = mBarChart.getXAxis();
             leftAxis.valueFormatter = ClaimsYAxisValueFormatter(homeViewModel.initialTo.value ?:"")
 
             it.chart1.description.isEnabled = false
@@ -205,6 +202,7 @@ class HomeFragment : Fragment() {
                 set1.values = values
                 it.chart1.data.notifyDataChanged()
                 it.chart1.notifyDataSetChanged()
+                it.chart1.marker = MyMarker(requireContext())
                 it.chart1.invalidate()
             }else{
                 set1 = LineDataSet(values, "Currency rate")
@@ -229,8 +227,8 @@ class HomeFragment : Fragment() {
                 dataSets.add(set1)
                 val data = LineData(dataSets)
                 it.chart1.data = data
-                it.chart1.marker = MyMarker(requireContext())
                 it.chart1.invalidate()
+                it.chart1.marker = MyMarker(requireContext())
             }
         }
     }

@@ -11,8 +11,14 @@ import ng.etokakingsley.cowrywise_converter.helper.Event
 import ng.etokakingsley.cowrywise_converter.internal.NetworkCb
 import ng.etokakingsley.cowrywise_converter.repository.AppRepository
 import timber.log.Timber
+import java.text.SimpleDateFormat
+import java.util.*
 
-class HomeViewModel @ViewModelInject constructor(@Assisted private val savedStateHandle: SavedStateHandle, val appRepository: AppRepository, @ApplicationContext context: Context) : ViewModel(), NetworkCb<String> {
+class HomeViewModel @ViewModelInject constructor(
+    @Assisted private val savedStateHandle: SavedStateHandle,
+    private val appRepository: AppRepository,
+    @ApplicationContext context: Context
+) : ViewModel(), NetworkCb<String> {
     val flashErrorMessage =   MutableLiveData<Event<String>>()
     val flashSuccessMessage = MutableLiveData<Event<String>>()
     val initialTo = MutableLiveData<String>("PLN")
@@ -29,7 +35,7 @@ class HomeViewModel @ViewModelInject constructor(@Assisted private val savedStat
 
     val currentRate : LiveData<Rate> = Transformations.switchMap(initialTo){
         it?.let {
-            appRepository.fetchSingleRate("2020-12-02", it).asLiveData()
+            appRepository.fetchSingleRate(retrieveDate(), it).asLiveData()
         }
     }
     init {
@@ -42,7 +48,7 @@ class HomeViewModel @ViewModelInject constructor(@Assisted private val savedStat
         }
     }
 
-    fun requestSingleRate(symbol : String){
+    fun requestSingleRate(symbol: String){
         initialTo.value = symbol
         viewModelScope.launch {
             isLoading.value = true
@@ -62,17 +68,23 @@ class HomeViewModel @ViewModelInject constructor(@Assisted private val savedStat
         flashErrorMessage.postValue(Event(message))
     }
 
-    fun formattedVal(rate: Rate?, from : String? ):String{
+    fun formattedVal(rate: Rate?, from: String?):String{
         return if(rate!=null && from!=null && from.trim()!="" ) (rate.rate* from.toDouble()).toString() else "0.0"
     }
 
-    fun switchTabs(position : Int ){
+    fun switchTabs(position: Int){
         currentTab.value = position
     }
 
-    fun switchCurrency(selectedCurrency : String){
+    fun switchCurrency(selectedCurrency: String){
         initialTo.value = selectedCurrency
     }
 
+    private fun retrieveDate(): String{
+        val c: Date = Calendar.getInstance().getTime()
+        val df = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        Timber.i(df.format(c))
+        return  df.format(c)
+    }
 
 }

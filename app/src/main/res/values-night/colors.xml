@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="brand_green">#03DAC5</color>
+    <!--SNACKBAR-->
+    <color name="error_snack">#D06679</color>
+</resources>

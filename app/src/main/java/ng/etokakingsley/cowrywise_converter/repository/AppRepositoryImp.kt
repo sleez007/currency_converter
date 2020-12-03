@@ -30,6 +30,7 @@ class AppRepositoryImp @Inject constructor(private val localDS: LocalDS, private
         //val data = remoteDS.requestSingleRate(accessKey, symbol)
         when(val data = remoteDS.requestAllRate(accessKey)){
             is Result.Success ->{
+                localDS.bulkInsertRate(data.data)
                 cb.success("Fetched")
             }
             is Result.Error ->{
@@ -40,6 +41,6 @@ class AppRepositoryImp @Inject constructor(private val localDS: LocalDS, private
 
     override fun fetchSingleRate(date: String, symbol: String): Flow<Rate> = localDS.fetchSingleRate(date, symbol)
 
-    override fun fetchAllRate(symbol: String): Flow<List<Rate>> =  localDS.fetchAllRate(symbol)
+    override fun fetchAllRate(symbol: String, limit:Int): Flow<List<Rate>> =  localDS.fetchAllRate(symbol, limit)
 
 }

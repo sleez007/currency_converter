@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 class LocalDSImpl @Inject constructor(private val rateDao: RateDao,private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO) : LocalDS{
     override fun fetchSingleRate(date: String, symbol: String): Flow<Rate> = rateDao.fetchSingleRate(date, symbol)
-    override fun fetchAllRate(symbol: String): Flow<List<Rate>> = rateDao.fetchAllRate(symbol)
+    override fun fetchAllRate(symbol: String, limit: Int): Flow<List<Rate>> = rateDao.fetchAllRate(symbol, limit)
     override suspend fun bulkInsertRate(data:BaseModel){
         withContext(ioDispatcher){
             val list : List<Rate> = NetworkToCache.convertNetworkRateToCacheRate(data)

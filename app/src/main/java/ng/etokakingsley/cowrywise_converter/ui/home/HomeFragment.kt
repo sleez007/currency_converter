@@ -202,7 +202,8 @@ class HomeFragment : Fragment() {
                 set1.values = values
                 it.chart1.data.notifyDataChanged()
                 it.chart1.notifyDataSetChanged()
-                it.chart1.marker = MyMarker(requireContext())
+                val mk = MyMarker(requireContext())
+                mk.chartView=it.chart1
                 it.chart1.invalidate()
             }else{
                 set1 = LineDataSet(values, "Currency rate")
@@ -227,8 +228,9 @@ class HomeFragment : Fragment() {
                 dataSets.add(set1)
                 val data = LineData(dataSets)
                 it.chart1.data = data
+                val mk = MyMarker(requireContext())
+                mk.chartView=it.chart1
                 it.chart1.invalidate()
-                it.chart1.marker = MyMarker(requireContext())
             }
         }
     }

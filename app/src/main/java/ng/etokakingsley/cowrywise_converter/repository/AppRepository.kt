@@ -8,5 +8,5 @@ interface AppRepository {
     suspend fun requestAllRate(cb:NetworkCb<String>)
     suspend fun requestSingleRate(cb:NetworkCb<String>, symbol: String)
     fun fetchSingleRate(date: String, symbol : String): Flow<Rate>
-    fun fetchAllRate(symbol : String): Flow<List<Rate>>
+    fun fetchAllRate(symbol : String, limit:Int): Flow<List<Rate>>
 }

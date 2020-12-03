@@ -6,6 +6,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#6AFFFFFF</color>
+   <color name="purple_200">#BC86FC</color>
+    <color name="green_200">#03DAC5</color>
+    <color name="alpha_white">#F0FFFCFC</color>
+    <color name="dark_alp">#1D1D1D</color>
 
     <!--SNACKBAR-->
     <color name="error_snack">#B00020</color>

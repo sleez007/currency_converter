@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="brandGreen" format="color"/>
+    <attr name="brandPurple" format="color"/>
+    <attr name="inputBg" format="color"/>
+    <attr name="modeCl" format="color"/>
+</resources>

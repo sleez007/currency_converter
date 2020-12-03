@@ -9,8 +9,8 @@ import ng.etokakingsley.cowrywise_converter.db.entities.Rate
 
 @Dao
 interface RateDao {
-    @Query("SELECT * FROM rate_table WHERE toCurrency=:symbol ORDER BY date DESC")
-    fun fetchAllRate(symbol:String) : Flow<List<Rate>>
+    @Query("SELECT * FROM rate_table WHERE toCurrency=:symbol ORDER BY date DESC LIMIT :limit")
+    fun fetchAllRate(symbol:String, limit : Int) : Flow<List<Rate>>
 
     @Query("SELECT * FROM rate_table WHERE date=:date AND toCurrency=:symbol LIMIT 1")
     fun fetchSingleRate(date: String, symbol : String): Flow<Rate>

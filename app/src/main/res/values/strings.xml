@@ -22,4 +22,5 @@
     <string name="retry">Retry</string>
     <string name="loading">Loading...</string>
     <string name="convert">Convert</string>
+    <string name="sign_up">Sign up</string>
 </resources>

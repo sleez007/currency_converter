@@ -5,7 +5,11 @@
     <!--BASIC APP THEME-->
     <style name="Theme.Converter" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimaryDark">@color/white</item>
-        <item name="colorPrimary">@color/brand_green</item>
+        <item name="colorPrimary">?attr/brandGreen</item>
+        <item name="brandGreen">@color/brand_green</item>
+        <item name="brandPurple">@color/brand_purple</item>
+        <item name="inputBg">@color/alpha_white</item>
+        <item name="modeCl">@color/white</item>
         <item name="android:statusBarColor">#99eef0f2</item>
 
 

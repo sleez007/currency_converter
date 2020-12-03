@@ -6,6 +6,6 @@ import ng.etokakingsley.cowrywise_converter.network.response.BaseModel
 
 interface LocalDS {
     fun fetchSingleRate(date: String, symbol : String): Flow<Rate>
-    fun fetchAllRate(symbol : String): Flow<List<Rate>>
+    fun fetchAllRate(symbol : String, limit: Int): Flow<List<Rate>>
     suspend fun bulkInsertRate(data : BaseModel)
 }

@@ -7,8 +7,10 @@ import androidx.lifecycle.*
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
 import ng.etokakingsley.cowrywise_converter.db.entities.Rate
+import ng.etokakingsley.cowrywise_converter.helper.CustomLiveData
 import ng.etokakingsley.cowrywise_converter.helper.Event
 import ng.etokakingsley.cowrywise_converter.internal.NetworkCb
+import ng.etokakingsley.cowrywise_converter.internal.TabEnum
 import ng.etokakingsley.cowrywise_converter.repository.AppRepository
 import timber.log.Timber
 import java.text.SimpleDateFormat
@@ -25,12 +27,19 @@ class HomeViewModel @ViewModelInject constructor(
     val isLoading = MutableLiveData<Boolean>(false)
     val from = MutableLiveData<String>("1")
 
-    val currentTab = MutableLiveData<Int>(1)
+    val currentTab = MutableLiveData<TabEnum>(TabEnum.THIRTY_DAYS_TAB)
 
-    val rates: LiveData<List<Rate>> = Transformations.switchMap(initialTo){
-        it?.let {
-            appRepository.fetchAllRate(it).asLiveData()
+    val rates: LiveData<List<Rate>> = Transformations.switchMap(CustomLiveData(initialTo,currentTab)){
+        if(it.first!= null && it.second!=null){
+            val limit: Int = when(it.second!!){
+               TabEnum.THIRTY_DAYS_TAB ->30
+                TabEnum.NINETY_DAYS_TAB->90
+            }
+            appRepository.fetchAllRate(it.first!!,limit ).asLiveData()
+        }else{
+            null
         }
+
     }
 
     val currentRate : LiveData<Rate> = Transformations.switchMap(initialTo){
@@ -72,8 +81,8 @@ class HomeViewModel @ViewModelInject constructor(
         return if(rate!=null && from!=null && from.trim()!="" ) (rate.rate* from.toDouble()).toString() else "0.0"
     }
 
-    fun switchTabs(position: Int){
-        currentTab.value = position
+    fun switchTabs(tab: TabEnum){
+        currentTab.value = tab
     }
 
     fun switchCurrency(selectedCurrency: String){

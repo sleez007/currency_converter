@@ -33,10 +33,10 @@ This sample App allows you to calculate currency rate, and also displays a chart
 
 <h2 align="left">Screenshots</h2>
 <h4 align="center">
-<img src="screenshots/day_1.png" width="25%" vspace="10" hspace="10">
-<img src="screenshots/day_2.png" width="25%" vspace="10" hspace="10">
-<img src="screenshots/night_1.png" width="25%" vspace="10" hspace="10"">
-<img src="screenshots/night_2.png" width="25%" vspace="10" hspace="10""><br>
+<img src="screenshots/day_1.png" width="40%" vspace="10" hspace="10">
+<img src="screenshots/day_2.png" width="40%" vspace="10" hspace="10"><br/>
+<img src="screenshots/night_1.png" width="40%" vspace="10" hspace="10"">
+<img src="screenshots/night_2.png" width="40%" vspace="10" hspace="10""><br>
 
 
 ## Author

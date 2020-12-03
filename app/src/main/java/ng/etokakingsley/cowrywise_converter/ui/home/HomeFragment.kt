@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.core.content.ContextCompat
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.github.mikephil.charting.components.Description
@@ -18,6 +19,8 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_main.*
+import ng.etokakingsley.cowrywise_converter.MainActivity
 import ng.etokakingsley.cowrywise_converter.R
 import ng.etokakingsley.cowrywise_converter.adapter.SpinnerAdapter
 import ng.etokakingsley.cowrywise_converter.databinding.FragmentHomeBinding
@@ -49,6 +52,9 @@ class HomeFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         binding?.apply {
             vm = homeViewModel
+            imageView4.setOnClickListener {
+                (activity as MainActivity).drawer_layout.openDrawer(GravityCompat.START)
+            }
             lifecycleOwner = viewLifecycleOwner
         }
         subscribeUI()
@@ -204,6 +210,7 @@ class HomeFragment : Fragment() {
                 it.chart1.notifyDataSetChanged()
                 val mk = MyMarker(requireContext())
                 mk.chartView=it.chart1
+                it.chart1.marker = mk
                 it.chart1.invalidate()
             }else{
                 set1 = LineDataSet(values, "Currency rate")
@@ -230,6 +237,7 @@ class HomeFragment : Fragment() {
                 it.chart1.data = data
                 val mk = MyMarker(requireContext())
                 mk.chartView=it.chart1
+                it.chart1.marker = mk
                 it.chart1.invalidate()
             }
         }

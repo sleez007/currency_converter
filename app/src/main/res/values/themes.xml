@@ -10,7 +10,7 @@
         <item name="brandPurple">@color/brand_purple</item>
         <item name="inputBg">@color/alpha_white</item>
         <item name="modeCl">@color/white</item>
-        <item name="android:statusBarColor">#99eef0f2</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
 
 
         <item name="android:colorBackground">@color/white</item>

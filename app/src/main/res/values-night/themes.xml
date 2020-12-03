@@ -4,10 +4,9 @@
     <style name="Theme.Converter.DayNight" parent="Theme.Converter.Dark"/>
 
     <style name="Theme.Converter.Dark" parent="Theme.Converter">
-        <item name="colorPrimaryDark">@color/black</item>
+        <item name="colorPrimaryDark">#50FFFFFF</item>
         <item name="brandPurple">@color/purple_200</item>
         <item name="brandGreen">@color/green_200</item>
-        <item name="android:statusBarColor">@color/white</item>
         <item name="inputBg">@color/dark_alp</item>
         <item name="modeCl">@color/black</item>
         <item name="android:colorBackground">@color/dark_background</item>

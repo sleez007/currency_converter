@@ -1,7 +1,7 @@
 package ng.etokakingsley.cowrywise_converter.helper
 
 /**
- * A generic class that holds a value with its loading status.
+ * A generic class that holds a value with its loading status. generally used for network operations
  * @param <T>
  */
 sealed class Result<out R> {

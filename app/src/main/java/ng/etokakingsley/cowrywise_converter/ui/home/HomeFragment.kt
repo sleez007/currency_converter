@@ -61,7 +61,11 @@ class HomeFragment : Fragment() {
         wireSpinners()
     }
 
+    /***
+     * Method registers watchers or observers for livedata update
+     */
     private fun subscribeUI(){
+        //This observer emits a success message when their is a success message from API call and pops a snackbar
         homeViewModel.flashSuccessMessage.observe(viewLifecycleOwner){
             it?.getContentIfNotHandled()?.let { msg->
                 binding?.let {
@@ -70,6 +74,8 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+
+        //This observer emits a error message when their is a success message from API call and pops a snackbar
         homeViewModel.flashErrorMessage.observe(viewLifecycleOwner){
             it?.getContentIfNotHandled()?.let { msg->
                 binding?.let {
@@ -82,6 +88,8 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+
+        //This observer emits the rates for selected currency to be plotted on the graph
         homeViewModel.rates.observe(viewLifecycleOwner){
             it?.let {
                 wireChart(it)
@@ -89,6 +97,9 @@ class HomeFragment : Fragment() {
         }
     }
 
+    /**
+     * @desc Populate the spinner with items and also handles spinner item selected event
+     */
     private  fun wireSpinners(){
         val toList: ArrayList<SpinnerObj> = ArrayList<SpinnerObj>()
         val fromList: ArrayList<SpinnerObj> = ArrayList<SpinnerObj>()
@@ -119,6 +130,9 @@ class HomeFragment : Fragment() {
         }
     }
 
+    /**
+     * @desc This method setups data to be displayed on the chart
+     */
     private fun wireChart(rateList: List<Rate>){
         binding?.let {
             val xAxisLabel: ArrayList<String> = ArrayList()

@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatDelegate
 import ng.etokakingsley.cowrywise_converter.app.Constants.THEME_DARK
 import ng.etokakingsley.cowrywise_converter.app.Constants.THEME_LIGHT
 
+/**
+ * @desc This helper class handles swiching of themes
+ */
 object ThemeHelper {
     fun applyTheme(themePref: String) {
         when (themePref) {

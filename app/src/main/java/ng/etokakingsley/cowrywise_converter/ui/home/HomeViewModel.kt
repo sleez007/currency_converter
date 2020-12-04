@@ -27,8 +27,14 @@ class HomeViewModel @ViewModelInject constructor(
     val isLoading = MutableLiveData<Boolean>(false)
     val from = MutableLiveData<String>("1")
 
+    //holds an enum value which represents which tab is currently selected
     val currentTab = MutableLiveData<TabEnum>(TabEnum.THIRTY_DAYS_TAB)
 
+    /**
+     * @desc Holds the list of rates for selected currency i.e A list of naira rate to be plotted
+     * CustomLiveData implementation was used here because we want to trigger switchMap based on changes to either of the two livedata.
+     * i.e if initail to changes, then query the database, and if currentTab changes i.e from 30 to 90 days, then trigger a new request to room
+     */
     val rates: LiveData<List<Rate>> = Transformations.switchMap(CustomLiveData(initialTo,currentTab)){
         if(it.first!= null && it.second!=null){
             val limit: Int = when(it.second!!){
@@ -50,6 +56,10 @@ class HomeViewModel @ViewModelInject constructor(
     init {
         requestData()
     }
+
+    /**
+     * @desc on initial load, fetch current data from API
+     */
     private fun requestData(){
         viewModelScope.launch {
             isLoading.value = true
@@ -57,6 +67,9 @@ class HomeViewModel @ViewModelInject constructor(
         }
     }
 
+    /**
+     * @desc method is triggered when the convert button is clicked
+     */
     fun requestSingleRate(symbol: String){
         initialTo.value = symbol
         viewModelScope.launch {
@@ -65,30 +78,48 @@ class HomeViewModel @ViewModelInject constructor(
         }
     }
 
+    /**
+     * @desc Network request success handler
+     */
     override fun success(response: String) {
         Timber.i(response)
         isLoading.value = false
         flashSuccessMessage.postValue(Event(response))
     }
 
+    /**
+     * @desc Network request error handler
+     */
     override fun error(message: String) {
         isLoading.value = false
         Timber.i(message)
         flashErrorMessage.postValue(Event(message))
     }
 
+    /**
+     * @desc this method is called from xml and returns the value of converting one currency to another
+     */
     fun formattedVal(rate: Rate?, from: String?):String{
         return if(rate!=null && from!=null && from.trim()!="" ) (rate.rate* from.toDouble()).toString() else "0.0"
     }
 
+    /**
+     * @desc Method switches between 30 and 90 days chart display
+     */
     fun switchTabs(tab: TabEnum){
         currentTab.value = tab
     }
 
+    /**
+     * Toggle currency
+     */
     fun switchCurrency(selectedCurrency: String){
         initialTo.value = selectedCurrency
     }
 
+    /**
+     * @Desc retrives the current date to use in querying room for data
+     */
     private fun retrieveDate(): String{
         val c: Date = Calendar.getInstance().getTime()
         val df = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())

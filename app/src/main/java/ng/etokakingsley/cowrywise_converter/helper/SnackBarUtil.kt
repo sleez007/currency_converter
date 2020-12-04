@@ -6,6 +6,9 @@ import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import ng.etokakingsley.cowrywise_converter.R
 
+/**
+ * Utility class for showing snackbars
+ */
 
 object SnackBarUtil {
     fun errorSnack(

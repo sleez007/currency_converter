@@ -11,6 +11,9 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
+/**
+ * @desc class handles the popup on the chart with rate information
+ */
 class MyMarker(context: Context) : MarkerView(context, R.layout.my_marker) {
     private val valueView = findViewById<TextView>(R.id.textView12)
 

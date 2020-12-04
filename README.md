@@ -6,7 +6,7 @@ This sample App allows you to calculate currency rate, and also displays a chart
 
 ##### Currency Converter API used: [http://fixer.io](https://fixer.io/)
 
-- App follows system settings and may startup in dark mode when installed on Android 10 or when battery saver is enabled on lower Android versions.
+ App follows system settings and may startup in dark mode when installed on Android 10 or when battery saver is enabled on lower Android versions.
 
 #### There are some known limitations on the app. for instance the base currency is set to Eur, this is because of the limitation on the data.fixer free account. A lot more could be done, but there are a lot of limitations on the free Api usage
 
@@ -38,6 +38,7 @@ This sample App allows you to calculate currency rate, and also displays a chart
 <img src="screenshots/night_1.png" width="40%" vspace="10" hspace="10"">
 <img src="screenshots/night_2.png" width="40%" vspace="10" hspace="10""><br>
 
+##### App Design is inspired by [Monika Tran] (https://dribbble.com/shots/6647815-Calculator)
 
 ## Author
 Etoka Kingsley

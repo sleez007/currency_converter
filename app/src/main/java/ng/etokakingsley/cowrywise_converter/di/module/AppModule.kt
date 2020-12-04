@@ -20,6 +20,9 @@ import ng.etokakingsley.cowrywise_converter.repository.dataSource.remote.RemoteD
 import ng.etokakingsley.cowrywise_converter.repository.dataSource.remote.RemoteDSImpl
 import javax.inject.Singleton
 
+/**
+ * App module dependency injection
+ */
 @InstallIn(ApplicationComponent::class)
 @Module
 object AppModule {
